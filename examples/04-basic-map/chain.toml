@@ -1,0 +1,16 @@
+[functions.filter-ip]
+path = "../functions/filter-ip"
+maps = { blocked_ips = { type = "hash_map", size = 65535 }, shared_counter = "_" }
+
+[[links]]
+from = "rx"
+to = ["filter-ip"]
+
+[[links]]
+from = "filter-ip"
+#to = ["tx", "drop"]
+to = ["pass", "drop"]
+
+[maps.shared_counter]
+type = "array"
+size = 16

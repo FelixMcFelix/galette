@@ -1,0 +1,15 @@
+[package]
+name = "{0}-user"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate_type = ["dylib"]
+
+[dependencies.libbpf-rs]
+# version = "0.18"
+git = "https://github.com/libbpf/libbpf-rs/"
+rev = "362a0a09af785a692c8d9d66dfb71f7779099bd7"
+
+[dependencies]
+

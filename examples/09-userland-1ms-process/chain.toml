@@ -1,0 +1,26 @@
+[functions.load-balance]
+path = "../functions/load-balance"
+maps = { upcall_likelihood = { type = "array", size = 1 } }
+
+[functions.macswap]
+path = "../functions/macswap"
+
+[functions.compute-heavy]
+path = "../functions/compute-heavy"
+disable_xdp = true
+
+[[links]]
+from = "rx"
+to = ["load-balance"]
+
+[[links]]
+from = "load-balance"
+to = ["macswap", "compute-heavy"]
+
+[[links]]
+from = "compute-heavy"
+to = ["macswap"]
+
+[[links]]
+from = "macswap"
+to = ["tx"]

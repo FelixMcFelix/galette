@@ -1,0 +1,19 @@
+[package]
+name = "protocol"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+crp = { version = "0.1", path = "../crp" }
+postcard = { version = "1", features = ["alloc", "use-std"] }
+rcgen = { version = "0.9", path = "../rcgen" }
+rustls = { features = ["dangerous_configuration"], version = "0.20.6" }
+serde = { version = "1", features = ["derive"] }
+thiserror = "1"
+tungstenite = "0.17"
+uuid = { version = "1", features = ["serde"] }
+webpki = "0.22"
+x509-parser = "0.14.0"
+asn1-rs = "0.5.1"

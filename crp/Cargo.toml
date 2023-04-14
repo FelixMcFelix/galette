@@ -1,0 +1,13 @@
+[package]
+name = "crp"
+authors = ["Kyle Simpson <kyleandrew.simpson@gmail.com>"]
+description = "Challenge-response utilities for mutual authentication."
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+fixedbitset = {features = ["serde"], version = "0.4"}
+rand = { features = ["min_const_gen"], version = "0.8" }
+serde = { version = "1", features = ["derive"] }

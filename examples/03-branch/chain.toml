@@ -1,0 +1,28 @@
+[functions.dest-ip-branch]
+path = "../functions/dest-ip-branch"
+
+[functions.macswap]
+path = "../functions/macswap"
+
+[functions.decrement-ip-ttl]
+path = "../functions/decrement-ip-ttl"
+
+[[links]]
+from = "rx"
+to = ["dest-ip-branch"]
+
+# "dest-ip-branch" has 4 potential output values based on the last 2 bits
+# of the destination ipv4 address.
+#
+# Here, we can use any other NF or special function ("tx", "drop") as a destination.
+[[links]]
+from = "dest-ip-branch"
+to = ["macswap", "tx", "decrement-ip-ttl", "drop"]
+
+[[links]]
+from = "decrement-ip-ttl"
+to = ["tx"]
+
+[[links]]
+from = "macswap"
+to = ["tx"]

@@ -1,0 +1,31 @@
+libbpf: Error loading BTF: Invalid argument(22)
+libbpf: magic: 0xeb9f
+version: 1
+flags: 0x0
+hdr_len: 24
+type_off: 0
+type_len: 468
+str_off: 468
+str_len: 592
+btf_total_size: 1084
+[1] PTR *mut xdp_md type_id=2 Invalid name
+
+libbpf: Error loading .BTF into kernel: -22. BTF is optional, ignoring.
+libbpf: load bpf program failed: Permission denied
+libbpf: -- BEGIN DUMP LOG ---
+libbpf: 
+0: R1=ctx(off=0,imm=0) R10=fp0
+0: (7b) *(u64 *)(r10 -8) = r1         ; R1=ctx(off=0,imm=0) R10=fp0 fp-8_w=ctx
+1: (bf) r1 = r10                      ; R1_w=fp0 R10=fp0
+2: (07) r1 += -8                      ; R1_w=fp-8
+3: (18) r2 = 0xffff954d64e9ae00       ; R2_w=map_ptr(off=0,ks=4,vs=4,imm=0)
+5: (b7) r3 = 0                        ; R3_w=0
+6: (85) call bpf_tail_call#12
+R1 type=fp expected=ctx
+processed 6 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+
+libbpf: -- END LOG --
+libbpf: failed to load program 'outer_xdp_sock_prog'
+libbpf: failed to load object 'outer_xdp_sock_prog'
+thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: System(4007)', pulley/src/main.rs:74:47
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

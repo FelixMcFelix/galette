@@ -1,0 +1,16 @@
+[workspace]
+
+[package]
+name = "xdp"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+probes = []
+
+[dependencies]
+cty = "0.2"
+redbpf-macros = { git = "https://github.com/FelixMcFelix/redbpf", branch = "lbpf-v0.8" } #"2.3.0"
+# redbpf-macros = { path = "/home/kyles/gits/redbpf/redbpf-macros" } #"2.3.0"
+redbpf-probes = { git = "https://github.com/FelixMcFelix/redbpf", branch = "lbpf-v0.8" } #"2.3.0"
+# redbpf-probes = { path = "/home/kyles/gits/redbpf/redbpf-probes" } #"2.3.0"

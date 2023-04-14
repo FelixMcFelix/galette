@@ -1,0 +1,10 @@
+[functions.macswap]
+path = "../functions/macswap"
+
+[[links]]
+from = "rx"
+to = ["macswap"]
+
+[[links]]
+from = "macswap"
+to = ["tx"]

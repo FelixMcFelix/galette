@@ -1,0 +1,17 @@
+[workspace]
+members = [
+	"chainsmith",
+	"crp",
+	"nf",
+	"nf-macros",
+	"protocol",
+	"pulley",
+]
+exclude = [
+	"evaluation",
+	"rcgen",
+	"webpki",
+]
+
+[patch.crates-io]
+webpki = { path = "webpki" }

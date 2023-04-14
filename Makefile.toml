@@ -1,0 +1,133 @@
+[env]
+CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true
+
+[tasks.format]
+toolchain = "nightly"
+install_crate = { crate_name = "rustfmt-nightly", rustup_component_name = "rustfmt-preview", binary = "rustfmt", test_arg = "--help" }
+command = "cargo"
+args = ["fmt", "--all"]
+
+[tasks.build]
+args = ["build", "--release"]
+dependencies = ["format"]
+
+[tasks.check]
+args = ["check"]
+dependencies = ["format"]
+
+[tasks.clippy]
+toolchain = "nightly"
+args = ["clippy", "--", "-D", "warnings"]
+command = "cargo"
+dependencies = ["format"]
+
+[tasks.ex-01]
+workspace = false
+command = "cargo"
+args = ["r", "--release", "--bin", "chainsmith", "--", "examples/01-macswap-xdp", "${@}"]
+dependencies = ["format", "certs"]
+
+[tasks.ex-02]
+workspace = false
+command = "cargo"
+args = ["r", "--release", "--bin", "chainsmith", "--", "examples/02-macswap-and-ttl-xdp", "${@}"]
+dependencies = ["format", "certs"]
+
+[tasks.ex-03]
+workspace = false
+command = "cargo"
+args = ["r", "--release", "--bin", "chainsmith", "--", "examples/03-branch", "${@}"]
+dependencies = ["format", "certs"]
+
+[tasks.ex-04]
+workspace = false
+command = "cargo"
+args = ["r", "--release", "--bin", "chainsmith", "--", "examples/04-basic-map", "${@}"]
+dependencies = ["format", "certs"]
+
+[tasks.ex-05]
+workspace = false
+command = "cargo"
+args = ["r", "--release", "--bin", "chainsmith", "--", "examples/05-upcall", "${@}"]
+dependencies = ["format", "certs"]
+
+[tasks.ex-06]
+workspace = false
+command = "cargo"
+args = ["r", "--release", "--bin", "chainsmith", "--", "examples/06-macswap-lb", "${@}"]
+dependencies = ["format", "certs"]
+
+[tasks.ex-07]
+workspace = false
+command = "cargo"
+args = ["r", "--release", "--bin", "chainsmith", "--", "examples/07-compute-heavy-userland", "${@}"]
+dependencies = ["format", "certs"]
+
+[tasks.ex-08]
+workspace = false
+command = "cargo"
+args = ["r", "--release", "--bin", "chainsmith", "--", "examples/08-compute-heavy-kernel", "${@}"]
+dependencies = ["format", "certs"]
+
+[tasks.ex-09]
+workspace = false
+command = "cargo"
+args = ["r", "--release", "--bin", "chainsmith", "--", "examples/09-userland-1ms-process", "${@}"]
+dependencies = ["format", "certs"]
+
+[tasks.ex-10]
+workspace = false
+command = "cargo"
+args = ["r", "--release", "--bin", "chainsmith", "--", "examples/10-moderate-lb", "${@}"]
+dependencies = ["format", "certs"]
+
+[tasks.ex-11]
+workspace = false
+command = "cargo"
+args = ["r", "--release", "--bin", "chainsmith", "--", "examples/11-light-lb", "${@}"]
+dependencies = ["format", "certs"]
+
+[tasks.r-client]
+workspace = false
+command = "cargo"
+args = ["r", "--release", "--bin", "pulley", "--", "${@}"]
+dependencies = ["format", "certs"]
+
+[tasks.r-server]
+workspace = false
+command = "cargo"
+args = ["r", "--release", "--bin", "chainsmith", "--", "${@}"]
+dependencies = ["format", "certs"]
+
+[tasks.test]
+args = ["test"]
+
+[tasks.doc]
+command = "cargo"
+args = ["doc"]
+
+[tasks.doc-open]
+workspace = false
+command = "cargo"
+args = ["doc", "--open"]
+
+[tasks.certs]
+workspace = false
+dependencies = ["cargo-cert"]
+condition = { files_not_exist = ["certs/client", "certs/server"] }
+script_runner = "@duckscript"
+script = [
+	"mkdir certs",
+	"cd certs",
+	"exec rcgen",
+	"mv certs client",
+	"exec rcgen",
+	"mv certs server",
+]
+
+[tasks.cargo-cert]
+command = "cargo"
+args = ["install", "rcgen"]
+
+[tasks.ready]
+dependencies = ["format", "test", "clippy"]

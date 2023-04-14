@@ -1,0 +1,25 @@
+[functions.load-balance]
+path = "../functions/load-balance"
+maps = { upcall_likelihood = { type = "array", size = 1 } }
+
+[functions.macswap]
+path = "../functions/macswap"
+
+[functions.compute-light]
+path = "../functions/compute-light"
+
+[[links]]
+from = "rx"
+to = ["load-balance"]
+
+[[links]]
+from = "load-balance"
+to = ["macswap", "!macswap"]
+
+[[links]]
+from = "macswap"
+to = ["compute-light"]
+
+[[links]]
+from = "compute-light"
+to = ["tx"]

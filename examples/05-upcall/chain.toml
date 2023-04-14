@@ -1,0 +1,18 @@
+[functions.no-op]
+path = "../functions/no-op"
+
+[functions.macswap]
+disable_xdp = true
+path = "../functions/macswap"
+
+[[links]]
+from = "rx"
+to = ["no-op"]
+
+[[links]]
+from = "no-op"
+to = ["macswap"]
+
+[[links]]
+from = "macswap"
+to = ["tx"]

@@ -1,0 +1,38 @@
+[package]
+name = "pulley"
+authors = ["Kyle Simpson <kyleandrew.simpson@gmail.com>"]
+description = "Client for XDP function chains on low-power SBC nodes."
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1"
+bus = "2"
+clap = { version = "4", features = ["derive", "error-context", "help", "usage", "wrap_help"] }
+crossbeam-channel = "0.5"
+dashmap = "5"
+dlopen2 = "0.4"
+futures-util = "0.3"
+goblin = "0.5"
+postcard = { features = ["alloc"], version = "1" }
+protocol = { path = "../protocol" }
+ringbuf = "0.3"
+serde = { version = "1", features = ["derive"] }
+tempfile = "3"
+thiserror = "1"
+tokio = { version = "1", default-features = false, features = ["fs", "io-std", "macros", "net", "rt-multi-thread", "signal", "time"] }
+toml = "0.5"
+tokio-tungstenite = { features = ["rustls-tls-webpki-roots"], version = "0.17" }
+tokio-rustls = "0.23"
+uuid = { version = "1", features = ["v4"] }
+
+[target.'cfg(unix)'.dependencies]
+core_affinity = "0.5"
+#libbpf-rs = "0.18"
+libbpf-rs = { git = "https://github.com/libbpf/libbpf-rs/", rev = "362a0a09af785a692c8d9d66dfb71f7779099bd7" }
+#libbpf-sys = { version = "0.8.3+v0.8.1", features = ["bindgen"] }
+xsk-rs = { git = "https://github.com/FelixMcFelix/xsk-rs/", branch = "lbpf-v0.8" }
+nix = "0.23"
+nf = { path = "../nf", features = ["user"] }

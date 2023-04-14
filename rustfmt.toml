@@ -1,0 +1,11 @@
+edition = "2021"
+unstable_features = true
+hard_tabs = true
+imports_layout = "HorizontalVertical"
+imports_granularity = "Crate"
+group_imports = "StdExternalCrate"
+match_arm_blocks = false
+match_block_trailing_comma = true
+newline_style = "Unix"
+use_field_init_shorthand = true
+use_try_shorthand = true

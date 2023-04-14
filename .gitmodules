@@ -1,0 +1,6 @@
+[submodule "rcgen"]
+	path = rcgen
+	url = https://github.com/FelixMcFelix/rcgen
+[submodule "webpki"]
+	path = webpki
+	url = https://github.com/FelixMcFelix/webpki
